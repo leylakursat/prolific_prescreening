@@ -47,7 +47,7 @@ function make_slides(f) {
           $('.button').hide();
         }
         exp.lives++;
-      } 
+      }
     },
   });
 
@@ -63,29 +63,24 @@ function make_slides(f) {
     start: function() {
       $(".err").hide();
     },
-    button : function() {
-        exp.go();
-    }
-  });
-
-  slides.questions = slide({
-    name: "questions",
-    start: function() {
-      $(".err").hide();
-    },
     // button2: function() {
     //   console.log("geri git")
     //   //exp.go("description");
     // },
     button : function() {
+
       var qual = $('input[name="qualify"]:checked').val();
       var agr = $('input[name="agree"]:checked').val()
+      console.log(qual);
+      console.log(agr);
+
       //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.data_trials.push({
-        "trial_type" : "questions",
+        "trial_type" : "description",
         'qualify': qual,
         'agree': agr,
       });
+
       if (qual=="Yes" & agr=="Yes") {
         console.log("yes")
         exp.go();
@@ -94,7 +89,7 @@ function make_slides(f) {
         exp.go("thanks");
       }
       //exp.go(); //use exp.go() if and only if there is no "present" data.
-    },
+    }
   });
 
   slides.info = slide({
@@ -114,7 +109,7 @@ function make_slides(f) {
 
   slides.thanks = slide({
     name : "thanks",
-    start : function() {  
+    start : function() {
       exp.data= {
           "trials" : exp.data_trials,
           "catch_trials" : exp.catch_trials,
@@ -144,7 +139,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["bot", "i0", "description", "questions", "info", 'thanks'];
+  exp.structure=["bot", "i0", "description", "info", 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:
