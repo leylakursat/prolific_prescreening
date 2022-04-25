@@ -73,14 +73,18 @@ function make_slides(f) {
     start: function() {
       $(".err").hide();
     },
+    // button2: function() {
+    //   console.log("geri git")
+    //   //exp.go("description");
+    // },
     button : function() {
       var qual = $('input[name="qualify"]:checked').val();
       var agr = $('input[name="agree"]:checked').val()
       //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.data_trials.push({
-        qualify: qual,
-        agree: agr,
-        email: $("#email").val(),
+        "trial_type" : "questions",
+        'qualify': qual,
+        'agree': agr,
       });
       if (qual=="Yes" & agr=="Yes") {
         console.log("yes")
@@ -90,14 +94,20 @@ function make_slides(f) {
         exp.go("thanks");
       }
       //exp.go(); //use exp.go() if and only if there is no "present" data.
-    }
+    },
   });
 
   slides.info = slide({
     name: "info",
     start: function() {
+      exp.email = document.getElementById("email").value;
     },
     button : function() {
+      exp.email = document.getElementById("email").value;
+      exp.data_trials.push({
+        "trial_type" : "info",
+        'email' : exp.email
+      });
         exp.go();
     }
   });
@@ -119,8 +129,6 @@ function make_slides(f) {
 
   return slides;
 }
-
-
 
 /// init ///
 function init() {
