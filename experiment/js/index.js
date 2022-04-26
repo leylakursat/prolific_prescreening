@@ -1,5 +1,6 @@
 function make_slides(f) {
   var   slides = {};
+  var participationStatus = 0;
 
   slides.bot = slide({
     name : "bot",
@@ -82,6 +83,7 @@ function make_slides(f) {
       });
 
       if (qual=="Yes" & agr=="Yes") {
+        participationStatus = 1;
         console.log("yes")
         exp.go();
       } else {
@@ -110,6 +112,16 @@ function make_slides(f) {
   slides.thanks = slide({
     name : "thanks",
     start : function() {
+
+      $(".participationYes").hide();
+      $(".participationNo").hide();
+
+      if (participationStatus == 1) {
+        $(".participationYes").show();
+      } else {
+        $(".participationNo").show();
+      }
+
       exp.data= {
           "trials" : exp.data_trials,
           "catch_trials" : exp.catch_trials,
